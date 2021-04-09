@@ -37,10 +37,21 @@ for ($i = 0; $i < count($datas); $i++) {
     $post = curl($url,0,$headers);
 	$port = json_decode($post);
         if (isset($port->tokens->zil18f5rlhqz9vndw4w8p60d0n7vg3n9sqvta7n6t2)) {
-			echo $address.' land'. "\n";
-		}else{
-			echo $address.' gak land'. "\n";
-		}
+		if (isset($port->tokens->zil18f5rlhqz9vndw4w8p60d0n7vg3n9sqvta7n6t2->balance)) {
+    $balance = $port->tokens->zil18f5rlhqz9vndw4w8p60d0n7vg3n9sqvta7n6t2->balance;
+} else {
+    $balance = 0;
+}
+$timestampx = $port->extra->sync->timestamp;
+$timestamp = date('d-m-Y H:i:s', $timestampx / 1000 );
+$resultnya = "$address [ PORT Balance: $balance ] [ Latest PORT TX Date: $timestamp ]";
+} else {
+    $balance = 0;
+    $resultnya = "$address [ PORT Balance: $balance ]";
+}
+
+echo $resultnya.PHP_EOL;
+		
 /*
 
     $curl->setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36');
