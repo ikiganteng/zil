@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 function curl($url, $data = 0, $header = 0, $cookie = 0) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -31,13 +32,13 @@ for ($i = 0; $i < count($datas); $i++) {
 
     $address = $datas[$i];
     $url = 'https://api.viewblock.io/zilliqa/addresses/' . $address . '?network=mainnet&page=1';
-	$headers = array();
+    $headers = array();
     $headers[] = 'Origin: https://viewblock.io';
     $headers[] = 'User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0';
     $post = curl($url,0,$headers);
 	$port = json_decode($post);
         if (isset($port->tokens->zil18f5rlhqz9vndw4w8p60d0n7vg3n9sqvta7n6t2)) {
-		if (isset($port->tokens->zil18f5rlhqz9vndw4w8p60d0n7vg3n9sqvta7n6t2->balance)) {
+	if (isset($port->tokens->zil18f5rlhqz9vndw4w8p60d0n7vg3n9sqvta7n6t2->balance)) {
     $balance = $port->tokens->zil18f5rlhqz9vndw4w8p60d0n7vg3n9sqvta7n6t2->balance;
 } else {
     $balance = 0;
